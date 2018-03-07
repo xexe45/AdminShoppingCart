@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Registro de Usuarios</h3>
+            </div>
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" formControlName="name" name="name" class="form-control" placeholder="Nombre Completo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                                    <input type="text" formControlName="dni" name="dni" class="form-control" placeholder="Documento de Identidad">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
+                                    <input type="text" formControlName="direccion" name="direccion" class="form-control" placeholder="Dirección Actual">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                    <input type="text" formControlName="telefono" name="telefono" class="form-control" placeholder="Teléfono Actual">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                    <select name="rol" id="" formControlName="rol" class="form-control">
+                                      <option value="">Seleccionar Rol...</option>
+                                      <option value="admin">Administrador</option>
+                                      <option value="employee">Trabajador</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                    <input type="password" formControlName="password" name="password" class="form-control" placeholder="Contraseña de 6 dígitos a más">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Listado de Usuarios ({{ total }})</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Mostrar: </label>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dni</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Email</th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.dni }}</td>
+                                <td>{{ user.direccion }}</td>
+                                <td>{{ user.telefono }}</td>
+                                <td><select name="rol" [(ngModel)]="user.rol">
+                                    <option value="admin">Administrador</option>
+                                    <option value="employee">Trabajador</option>
+                                </select></td>
+                                <td>{{ user.email }}</td>
+                                <td class="text-center"><button type="button" class="btn btn-sm btn-info" (click)="editar(user)">Editar</button></td>
+                                <td class="text-center"><button type="button" class="btn btn-sm btn-danger" (click)="eliminar(user._id)">Borrar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li [ngClass]="{disabled: desde === 0}"><a (click)="cambiarDesde(-5)" class="pointer">Anterior</a></li>
+                        <li [ngClass]="{disabled: desde + 5 >= total}"><a (click)="cambiarDesde(5)" class="pointer">Siguiente</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
